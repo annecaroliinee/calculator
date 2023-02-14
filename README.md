@@ -1,4 +1,4 @@
 # to-do-list-advanced
 
-Projeto 3- Mentoria 
+Projeto 3
 Elaboração de TO DO LIST ADVANCED

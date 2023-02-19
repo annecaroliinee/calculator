@@ -70,3 +70,80 @@ class Calculator {
         return;
     }
   }
+
+  
+// Altera os valores da tela da calculadora
+  updateScreen(
+    operationValue = null,
+    operation = null,
+    current = null,
+    previous = null
+  ) {
+    if (operationValue === null) {
+      
+// Anexa número ao valor atual
+      this.currentOperationText.innerText += this.currentOperation;
+    } else {
+     
+// Verifica se o valor é zero, se for apenas adiciona o valor atual
+      if (previous === 0) {
+        operationValue = current;
+      }
+      // Adiciona o valor atual ao anterior
+      this.previousOperationText.innerText = `${operationValue} ${operation}`;
+      this.currentOperationText.innerText = "";
+    }
+  }
+
+  // MUda a operação matemática
+  changeOperation(operation) {
+    const mathOperations = ["*", "-", "+", "/"];
+
+    if (!mathOperations.includes(operation)) {
+      return;
+    }
+
+    this.previousOperationText.innerText =
+      this.previousOperationText.innerText.slice(0, -1) + operation;
+  }
+
+  // Deleta um dígito
+  processDelOperator() {
+    this.currentOperationText.innerText =
+      this.currentOperationText.innerText.slice(0, -1);
+  }
+
+  
+// Limpa a operação atual
+  processClearCurrentOperator() {
+    this.currentOperationText.innerText = "";
+  }
+
+  // LImpa todas as operações
+  processClearOperator() {
+    this.currentOperationText.innerText = "";
+    this.previousOperationText.innerText = "";
+  }
+
+  // Processa uma operação
+  processEqualOperator() {
+    let operation = this.previousOperationText.innerText.split(" ")[1];
+
+    this.processOperation(operation);
+  }
+}
+
+const calc = new Calculator(previousOperationText, currentOperationText);
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const value = e.target.innerText;
+
+    if (+value >= 0 || value === ".") {
+      console.log(value);
+      calc.addDigit(value);
+    } else {
+      calc.processOperation(value);
+    }
+  });
+});

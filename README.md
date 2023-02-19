@@ -7,5 +7,5 @@
 </h1>
 
 O objetivo desse projeto foi treinar a lógica do JS,
-com as operações básica de uma calculadora.
+com as operações básicas de uma calculadora.
   
